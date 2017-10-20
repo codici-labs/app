@@ -22,7 +22,7 @@
 	<ion-list >
    		<ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
     		<h2>{{item.descripcion}}</h2>
-    		<p><strong>Cantidad: </strong> {{item.codigo}}</p>
+    		<p><strong>Cantidad: </strong> {{item.cantidad}} - <strong>Precio: </strong> ${{item.costo}}</p>
     		<button ion-button clear item-end>Ver</button>
   		</ion-item>
 	</ion-list>

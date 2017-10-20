@@ -20,6 +20,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 export class VentaPage {
 //var items: Array<{id: string, codigo: string, descripcion: string, stock: string, costo: strin>;
 items: Array<any>;
+index: any;
 //data: Array<{id: string, codigo: string, descripcion: string, stock: string, costo: string}>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private barcodeScanner: BarcodeScanner) {
   	//this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProducts').map(res => res.json()).subscribe(data => {
@@ -27,6 +28,7 @@ items: Array<any>;
       //  this.items = data;
     //});
     this.items = [];
+    this.index = {};
   }
 
   ionViewDidLoad() {
@@ -54,8 +56,17 @@ items: Array<any>;
         
         //ultimo = length(this.items);
         //this.items[ultimo+1] = data;
-        this.items.push(data);
-        console.log(data);
+        console.log(this.index, this.items);
+         if(typeof this.index[data.codigo] === "undefined"){ 
+           data.cantidad = 1;
+           this.items.push(data);
+           this.index[data.codigo] = this.items.length;
+         } else {
+           this.items[this.index[data.codigo]].cantidad += 1;
+         }
+
+        //}
+        //console.log(this.index, this.items);
       });
      
     }, (err) => {
