@@ -18,12 +18,15 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 
 export class VentaPage {
-items: Array<{title: string, note: string, icon: string}>;
+//var items: Array<{id: string, codigo: string, descripcion: string, stock: string, costo: strin>;
+items: Array<any>;
+//data: Array<{id: string, codigo: string, descripcion: string, stock: string, costo: string}>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private barcodeScanner: BarcodeScanner) {
-  	 this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProducts').map(res => res.json()).subscribe(data => {
+  	//this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProducts').map(res => res.json()).subscribe(data => {
         
-        this.items = data;
-    });
+      //  this.items = data;
+    //});
+    this.items = [];
   }
 
   ionViewDidLoad() {
@@ -42,11 +45,19 @@ items: Array<{title: string, note: string, icon: string}>;
     
     this.barcodeScanner.scan().then((barcodeData) => {
      // Success! Barcode data is here
-     console.log('codigo de barras '+barcodeData);
-     this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProduct'+barcodeData).map(res => res.json()).subscribe(data => {
+     console.log('codigo de barras '+barcodeData.text);
+      
+      this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProduct/'+barcodeData.text).map(res => res.json()).subscribe(data => { 
+
+        //this.items = this.items+data;
         
-        this.items = data;
-    });
+        
+        //ultimo = length(this.items);
+        //this.items[ultimo+1] = data;
+        this.items.push(data);
+        console.log(data);
+      });
+     
     }, (err) => {
       console.log(err);
         // An error occurred
