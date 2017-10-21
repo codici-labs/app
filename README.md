@@ -16,6 +16,10 @@ $ npm install --save @ionic-native/camera
 Para correrlo por usb
 
 ionic cordova run android --consolelogs
+
+Para correrlo localmente
+
+ionic serve
 ```
 
 
