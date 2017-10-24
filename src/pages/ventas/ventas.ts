@@ -104,6 +104,7 @@ subtotal: any;
     console.log(this.index.indexOf(codigo));
     this.items.splice(this.index[codigo],1);
     //this.index.splice(this.index.indexOf(codigo),1);
+    delete this.index[codigo];
     this.actualizaTotal();
   }
 
