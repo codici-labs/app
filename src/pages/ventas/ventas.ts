@@ -21,6 +21,7 @@ export class VentaPage {
 //var items: Array<{id: string, codigo: string, descripcion: string, stock: string, costo: strin>;
 items: Array<any>;
 index: any;
+//total, subtotal: Float32Array;
 //data: Array<{id: string, codigo: string, descripcion: string, stock: string, costo: string}>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private barcodeScanner: BarcodeScanner) {
   	//this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProducts').map(res => res.json()).subscribe(data => {
@@ -29,6 +30,8 @@ index: any;
     //});
     this.items = [];
     this.index = {};
+    this.subtotal=0.00;
+    this.total=0.00;
   }
 
   ionViewDidLoad() {
@@ -64,8 +67,11 @@ index: any;
          } else {
            this.items[this.index[data.codigo]].cantidad += 1;
          }
-
-        //}
+        this.total = 0;
+        for(let i = 0; i < this.items.length; i++){
+          this.subtotal = ((this.items[i].cantidad)*(this.items[i].costo));
+          this.total = this.total+this.subtotal;
+        }
         //console.log(this.index, this.items);
       });
      
