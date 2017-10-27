@@ -7,12 +7,14 @@ import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
 import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
 import { VentaPage } from '../pages/ventas/ventas';
+import { NfcPage } from '../pages/nfc/nfc';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { HttpModule } from '@angular/http';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { Camera } from '@ionic-native/camera';
+import { NFC, Ndef } from '@ionic-native/nfc';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { Camera } from '@ionic-native/camera';
     HelloIonicPage,
     ItemDetailsPage,
     ListPage,
-    VentaPage
+    VentaPage,
+    NfcPage
   ],
   imports: [
     BrowserModule,
@@ -33,13 +36,16 @@ import { Camera } from '@ionic-native/camera';
     HelloIonicPage,
     ItemDetailsPage,
     ListPage,
-    VentaPage
+    VentaPage,
+    NfcPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Camera,
     BarcodeScanner,
+    NFC, 
+    Ndef,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
