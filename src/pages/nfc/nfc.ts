@@ -20,34 +20,29 @@ export class NfcPage {
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private nfc: NFC, private ndef: Ndef) {
 
 
-
+/*
   	this.nfc.addNdefListener(() => {
   		console.log('successfully attached ndef listener');
-	}, (err) => {
+	  }, (err) => {
   		console.log('error attaching ndef listener', err);
-	}).subscribe((event) => {
+	  }).subscribe((event) => {
   		console.log('received ndef message. the tag contains: ', event.tag);
   		var idTarjeta = this.nfc.bytesToHexString(event.tag.id);
   		console.log('decoded tag id', idTarjeta);
 
-  		//let message = this.ndef.textRecord('Hello world');
-  		//this.nfc.share([message]).then(onSuccess).catch(onError);
+  		  //let message = this.ndef.textRecord('Hello world');
+  		  //this.nfc.share([message]).then(onSuccess).catch(onError);
 
 
 
-
-		this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getAlumno/'+idTarjeta).map(res => res.json()).subscribe(data => { 
+		  this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getAlumno/'+idTarjeta).map(res => res.json()).subscribe(data => { 
 
          	//chequeos de saldos
         	
-        	console.log(data.nombre, data.apellido);
-      	});
+        console.log(data.nombre, data.apellido);
+      });
 
-
-
-
-	});
-
+	  });*/
 
 
   }
@@ -55,6 +50,27 @@ export class NfcPage {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NfcPage');
+  }
+
+  leerTag() {
+    this.nfc.addTagDiscoveredListener(() => {
+      console.log('bien');
+    }, (err) => {
+      console.log('mal', err);
+    }).subscribe(res => {
+      console.log("res " + this.nfc.bytesToHexString(res.tag.id));
+      this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getAlumno/'+this.nfc.bytesToHexString(res.tag.id)).map(res => res.json()).subscribe(data => { 
+        try {
+          //iniciaVenta(data)
+          console.log(data.nombre, data.apellido);
+        }
+        catch (e) {
+          console.log("no existe usuario");
+        }
+        
+      });
+        // this.nfc.removeTagDiscoveredListener();
+    },(err) => console.log(err));
   }
 
 }
