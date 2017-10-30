@@ -32,4 +32,8 @@ export class ModalPage {
     console.log('ionViewDidLoad ModalPage');
   }
 
+  getItems(event){
+  	console.log(event);
+  }
+
 }
