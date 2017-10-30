@@ -33,7 +33,16 @@ export class ModalPage {
   }
 
   getItems(event){
-  	console.log(event);
+  	if(event.data != ''){
+  		this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProductByName/'+event.data).map(res => res.json()).subscribe(data => {    
+	        this.items = data;
+	    });
+  	}else{
+  		this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProducts').map(res => res.json()).subscribe(data => {    
+	        this.items = data;
+	    });
+  	}
+  	
   }
 
 }
