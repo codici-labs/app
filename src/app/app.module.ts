@@ -8,6 +8,7 @@ import { ItemDetailsPage } from '../pages/item-details/item-details';
 import { ListPage } from '../pages/list/list';
 import { VentaPage } from '../pages/ventas/ventas';
 import { NfcPage } from '../pages/nfc/nfc';
+import { ModalPage } from '../pages/modal/modal';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -23,7 +24,8 @@ import { NFC, Ndef } from '@ionic-native/nfc';
     ItemDetailsPage,
     ListPage,
     VentaPage,
-    NfcPage
+    NfcPage,
+    ModalPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ import { NFC, Ndef } from '@ionic-native/nfc';
     ItemDetailsPage,
     ListPage,
     VentaPage,
-    NfcPage
+    NfcPage,
+    ModalPage
   ],
   providers: [
     StatusBar,
