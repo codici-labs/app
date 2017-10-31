@@ -1,10 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ItemDetailsPage } from '../item-details/item-details';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ModalController } from 'ionic-angular';
 import { ModalPage } from '../modal/modal';
+
 
 /**
  * Generated class for the VentasPage page.
@@ -28,7 +29,7 @@ total: any;
 subtotal: any;
 selectedAlumno: any;
 //data: Array<{id: string, codigo: string, descripcion: string, stock: string, costo: string}>;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private barcodeScanner: BarcodeScanner, public modalCtrl: ModalController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private barcodeScanner: BarcodeScanner, public modalCtrl: ModalController, private chRef: ChangeDetectorRef) {
   	//this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProducts').map(res => res.json()).subscribe(data => {
         
       //  this.items = data;
@@ -38,6 +39,7 @@ selectedAlumno: any;
     this.subtotal=0.00;
     this.total=0.00;
     this.selectedAlumno = navParams.get('alumno');
+
   }
 
   ionViewDidLoad() {
@@ -66,21 +68,6 @@ selectedAlumno: any;
       
       this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProduct/'+barcodeData.text).map(res => res.json()).subscribe(data => { 
 
-        //this.items = this.items+data;
-        
-        
-        //ultimo = length(this.items);
-        //this.items[ultimo+1] = data;
-        /*
-        console.log(this.items);
-         if(typeof this.items[data.codigo] === "undefined"){ 
-           data.cantidad = 1;
-           this.items[data.codigo] = data;
-           //this.index[data.codigo] = (this.items.length -1);
-         } else {
-           this.items[data.codigo].cantidad += 1;
-         }
-         */
          var existe = false;
          for (let i=0; i<this.items.length; i++){
            if (this.items[i].codigo == data.codigo) {
@@ -91,6 +78,9 @@ selectedAlumno: any;
          if (!existe) {
            data.cantidad = 1;
            this.items.push(data);
+
+           //this.navCtrl.setRoot(this.navCtrl.getActive().component);
+           console.log('pasa por aca');
          }
         this.actualizaTotal();
         //console.log(this.index, this.items);
@@ -107,6 +97,7 @@ selectedAlumno: any;
     for(let i=0; i<this.items.length; i++){
       this.subtotal = ((this.items[i].cantidad)*(this.items[i].costo));
       this.total = this.total+this.subtotal;
+      this.chRef.detectChanges();
     }
   }
 
