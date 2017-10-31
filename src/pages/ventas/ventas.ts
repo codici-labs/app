@@ -26,6 +26,7 @@ items: Array<any>;
 //index: any;
 total: any;
 subtotal: any;
+selectedAlumno: any;
 //data: Array<{id: string, codigo: string, descripcion: string, stock: string, costo: string}>;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private barcodeScanner: BarcodeScanner, public modalCtrl: ModalController) {
   	//this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProducts').map(res => res.json()).subscribe(data => {
@@ -36,6 +37,7 @@ subtotal: any;
     //this.index = {};
     this.subtotal=0.00;
     this.total=0.00;
+    this.selectedAlumno = navParams.get('alumno');
   }
 
   ionViewDidLoad() {

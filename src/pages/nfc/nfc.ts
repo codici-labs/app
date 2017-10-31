@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NFC, Ndef } from '@ionic-native/nfc';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
+import { App, ViewController } from 'ionic-angular';
+import { VentaPage } from '../ventas/ventas';
 
 /**
  * Generated class for the NfcPage page.
@@ -15,11 +17,14 @@ import { Http } from '@angular/http';
   selector: 'page-nfc',
   templateUrl: 'nfc.html',
 })
+
+
 export class NfcPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private nfc: NFC, private ndef: Ndef) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private nfc: NFC, private ndef: Ndef, public viewCtrl: ViewController, public appCtrl: App) {
 
 
+      
 /*
   	this.nfc.addNdefListener(() => {
   		console.log('successfully attached ndef listener');
@@ -45,11 +50,31 @@ export class NfcPage {
 	  });*/
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
   }
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NfcPage');
+  }
+
+  iniciaVenta(data) {
+    console.log(data.nombre);
+    this.navCtrl.push(VentaPage, {
+      alumno: data
+    });
   }
 
   leerTag() {
@@ -61,7 +86,8 @@ export class NfcPage {
       console.log("res " + this.nfc.bytesToHexString(res.tag.id));
       this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getAlumno/'+this.nfc.bytesToHexString(res.tag.id)).map(res => res.json()).subscribe(data => { 
         try {
-          //iniciaVenta(data)
+          this.iniciaVenta(data);
+
           console.log(data.nombre, data.apellido);
         }
         catch (e) {
@@ -74,3 +100,6 @@ export class NfcPage {
   }
 
 }
+
+
+
