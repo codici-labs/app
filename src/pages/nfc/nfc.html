@@ -10,8 +10,8 @@
       		<ion-icon name="menu"></ion-icon>
     	</button>
     <ion-title>NFC
-    	<button ion-button icon-only  class="add-item" (click)="leerTag()">
-        	<ion-icon name="add"></ion-icon> 
+    	<button ion-button icon-only  class="add-item" vertical-align="middle" (click)="leerTag()">
+        	<ion-icon name="add" ></ion-icon> 
       	</button>
   	</ion-title>
 	</ion-navbar>
@@ -20,6 +20,8 @@
 
 
 <ion-content padding>
-      <h1>My PopoverPage</h1>
+  <h1 align="center">{{nfcTexto}}</h1><BR><BR>
+      <div align="center"><img src="{{nfcImage}}" alt="Description" /></div>
+      
       
 </ion-content>

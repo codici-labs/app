@@ -140,5 +140,9 @@ selectedAlumno: any;
     this.actualizaTotal();
   }
 
+  cancelaCompra(){
+    this.navCtrl.popToRoot();
+  }
+
 
 }

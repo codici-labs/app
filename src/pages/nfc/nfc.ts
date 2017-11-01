@@ -20,9 +20,11 @@ import { VentaPage } from '../ventas/ventas';
 
 
 export class NfcPage {
-
+  nfcImage: any;
+  nfcTexto: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private nfc: NFC, private ndef: Ndef, public viewCtrl: ViewController, public appCtrl: App) {
-
+    this.nfcImage = "assets/img/waitnfc.gif";
+    this.nfcTexto = "Aproxime la tarjeta al lector";
 
       
 /*
@@ -54,24 +56,18 @@ export class NfcPage {
 
 
 
-
-
-
-
-
-
-
-
-
   }
 
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad NfcPage');
+
   }
 
   iniciaVenta(data) {
     console.log(data.nombre);
+    //this.nfcImage = "assets/img/nfcgood.jpg";
+    //sleep de 1 segundo??? 
     this.navCtrl.push(VentaPage, {
       alumno: data
     });
@@ -86,18 +82,24 @@ export class NfcPage {
       console.log("res " + this.nfc.bytesToHexString(res.tag.id));
       this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getAlumno/'+this.nfc.bytesToHexString(res.tag.id)).map(res => res.json()).subscribe(data => { 
         try {
+          
+          //this.nfc.removeTagDiscoveredListener();
           this.iniciaVenta(data);
-
+          
           console.log(data.nombre, data.apellido);
         }
         catch (e) {
           console.log("no existe usuario");
+          this.nfcTexto = "No existe usuario";
+          this.nfcImage = "assets/img/nfcerror.jpg";
+          this.navCtrl.setRoot(NfcPage);
         }
         
       });
         // this.nfc.removeTagDiscoveredListener();
     },(err) => console.log(err));
   }
+
 
 }
 

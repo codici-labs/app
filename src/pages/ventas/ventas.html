@@ -18,7 +18,7 @@
 
 
 <ion-content padding>
-  {{selectedAlumno.nombre}} {{selectedAlumno.apellido}}
+  <p align="center"><strong>Alumno: </strong> {{selectedAlumno.nombre}} {{selectedAlumno.apellido}} - <strong>Saldo: </strong> {{selectedAlumno.credito}} </p>
 
 	<ion-list >
    		<ion-item *ngFor="let item of items" >
@@ -40,11 +40,18 @@
   		</ion-item>
 	</ion-list>
 
+
+</ion-content>
+
+<ion-footer>
+    
+    <!-- put some elements here -->
+
   <h3 align="right"><strong>TOTAL: ${{total.toFixed(2)}}</strong></h3>
 
 
 
-	<!-- Float the icon left -->
+  <!-- Float the icon left -->
 <button ion-button icon-only (click)="showCamera()">
   <ion-icon name="md-barcode"></ion-icon>
    
@@ -55,13 +62,15 @@
 
 </button>
 <!-- Float the icon only -->
-<button ion-button icon-only>
+<button ion-button icon-only (click)="cancelaCompra()">
   <ion-icon name="close"></ion-icon>
-
 </button>
 
 
+    
+</ion-footer>
 
 
 
-</ion-content>
+
+
