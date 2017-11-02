@@ -26,6 +26,7 @@ export class VentaPage {
 items: Array<any>;
 //index: any;
 total: any;
+compra: any;
 subtotal: any;
 selectedAlumno: any;
 //data: Array<{id: string, codigo: string, descripcion: string, stock: string, costo: string}>;
@@ -36,10 +37,11 @@ selectedAlumno: any;
     //});
     this.items = [];
     //this.index = {};
+    
     this.subtotal=0.00;
     this.total=0.00;
     this.selectedAlumno = navParams.get('alumno');
-
+    this.compra = {};
   }
 
   ionViewDidLoad() {
@@ -142,6 +144,18 @@ selectedAlumno: any;
 
   cancelaCompra(){
     this.navCtrl.popToRoot();
+  }
+
+  confirmarCompra(){
+    
+    console.log('Confirmar compra');
+    
+    this.compra.products = this.items;
+    this.compra.alumno = this.selectedAlumno;
+ 
+    this.http.post('/api', this.compra).map(res => res.json()).subscribe(data => {console.log(data);}, err => {console.log("ERROR!: ", err);});
+    
+  
   }
 
 

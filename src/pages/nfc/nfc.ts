@@ -24,7 +24,7 @@ export class NfcPage {
   nfcTexto: any;
   constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private nfc: NFC, private ndef: Ndef, public viewCtrl: ViewController, public appCtrl: App) {
     this.nfcImage = "assets/img/waitnfc.gif";
-    this.nfcTexto = "Aproxime la tarjeta al lector";
+    //this.nfcTexto = "Para iniciar una nueva venta <br>aproxime la tarjeta al lector";
 
       
 /*
@@ -60,6 +60,7 @@ export class NfcPage {
 
 
   ionViewDidLoad() {
+    this.leerTag();
     console.log('ionViewDidLoad NfcPage');
 
   }
