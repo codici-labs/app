@@ -5,7 +5,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { ItemDetailsPage } from '../item-details/item-details';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { Camera, CameraOptions } from '@ionic-native/camera';
+
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 
 @Component({
@@ -16,12 +16,12 @@ export class ListPage {
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private camera: Camera, private barcodeScanner: BarcodeScanner) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private barcodeScanner: BarcodeScanner) {
     this.icons = ['flask', 'wifi', 'beer', 'football', 'basketball', 'paper-plane',
     'american-football', 'boat', 'bluetooth', 'build'];
 
 
-    this.http.get('http://codicilabs.com/proyectos/card/index.php/api/getProducts').map(res => res.json()).subscribe(data => {
+    this.http.get('192.168.1.106/card-project/index.php/api/getProducts').map(res => res.json()).subscribe(data => {
         
         this.items = data;
     });

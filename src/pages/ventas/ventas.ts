@@ -148,13 +148,16 @@ selectedAlumno: any;
 
   confirmarCompra(){
     
-    console.log('Confirmar compra');
-    
-    this.compra.products = this.items;
+    this.compra.productos = this.items;
     this.compra.alumno = this.selectedAlumno;
- 
-    this.http.post('/api', this.compra).map(res => res.json()).subscribe(data => {console.log(data);}, err => {console.log("ERROR!: ", err);});
     
+    console.log(this.compra.alumno.id);
+   
+    this.http.post('http://codicilabs.com/proyectos/card/index.php/api/confirmarCompra', {alumno: this.compra.alumno, productos: this.compra.productos, total:this.total}).subscribe(data => {
+        var myJSON = JSON.stringify(data);
+        console.log(myJSON);
+      }, err => {console.log("ERROR!: ", JSON.stringify(err));});
+      
   
   }
 

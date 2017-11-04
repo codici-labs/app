@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NFC, Ndef } from '@ionic-native/nfc';
+import { NFC } from '@ionic-native/nfc';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { App, ViewController } from 'ionic-angular';
@@ -22,7 +22,7 @@ import { VentaPage } from '../ventas/ventas';
 export class NfcPage {
   nfcImage: any;
   nfcTexto: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private nfc: NFC, private ndef: Ndef, public viewCtrl: ViewController, public appCtrl: App) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: Http, private nfc: NFC,  public viewCtrl: ViewController, public appCtrl: App) {
     this.nfcImage = "assets/img/waitnfc.gif";
     //this.nfcTexto = "Para iniciar una nueva venta <br>aproxime la tarjeta al lector";
 
@@ -103,6 +103,3 @@ export class NfcPage {
 
 
 }
-
-
-

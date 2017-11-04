@@ -20,8 +20,8 @@
 <ion-content padding>
   <p align="center"><strong>Alumno: </strong> {{selectedAlumno.nombre}} {{selectedAlumno.apellido}} - <strong>Saldo: </strong> {{selectedAlumno.credito}} </p>
 
-	<ion-list >
-   		<ion-item *ngFor="let item of items" >
+	<ion-list *ngFor="let item of items">
+   		<ion-item>
     		<h2>{{item.descripcion}}</h2>
     		<p><strong>Cantidad: </strong> {{item.cantidad}} - <strong>Precio: </strong> ${{item.costo}}</p>
 
@@ -43,7 +43,7 @@
 
 </ion-content>
 
-<ion-footer>
+<ion-footer padding>
     
     <!-- put some elements here -->
 
@@ -52,23 +52,23 @@
 
 
   <!-- Float the icon left -->
-<button ion-button icon-only (click)="showCamera()">
+<button ion-button icon-only (click)="showCamera()" class="btn-venta">
   <ion-icon name="md-barcode"></ion-icon>
    
 </button>
 <!-- Float the icon only -->
-<button ion-button icon-only (click)="buscarProductos({charNum: 2})">
+<button ion-button icon-only (click)="buscarProductos({charNum: 2})" class="btn-venta">
   <ion-icon name="search"></ion-icon>
 
 </button>
 <!-- Float the icon only -->
-<button ion-button icon-only (click)="cancelaCompra()">
+<button ion-button icon-only (click)="cancelaCompra()" class="btn-venta" color="danger">
   <ion-icon name="close"></ion-icon>
 </button>
- <button ion-button item-end (click)="confirmarCompra()">
-          <ion-icon name="close"></ion-icon>
+ <button ion-button item-end (click)="confirmarCompra()" class="btn-venta" color="success">
+          <ion-icon name="checkmark-circle-outline"></ion-icon>
         </button>
-
+ 
 
     
 </ion-footer>
