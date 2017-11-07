@@ -148,7 +148,8 @@ selectedAlumno: any;
   }
 
   volverNFC(){
-    this.navCtrl.push(NfcPage);
+    //this.navCtrl.push(NfcPage);
+    this.navCtrl.popToRoot();
   }
 
   confirmarCompra(){
@@ -161,7 +162,7 @@ selectedAlumno: any;
     this.http.post('http://codicilabs.com/proyectos/card/index.php/api/confirmarCompra', {alumno: this.compra.alumno, productos: this.compra.productos, total:this.total}).subscribe(data => {
         var myJSON = JSON.stringify(data);
         console.log(myJSON);
-        volverNFC();
+        this.volverNFC();
       }, err => {console.log("ERROR!: ", JSON.stringify(err));});
       
   
