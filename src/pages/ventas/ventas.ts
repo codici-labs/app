@@ -2,6 +2,7 @@ import { Component, ChangeDetectorRef } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Http } from '@angular/http';
 import { ItemDetailsPage } from '../item-details/item-details';
+import { NfcPage } from '../nfc/nfc';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner';
 import { ModalController } from 'ionic-angular';
 import { ModalPage } from '../modal/modal';
@@ -146,6 +147,10 @@ selectedAlumno: any;
     this.navCtrl.popToRoot();
   }
 
+  volverNFC(){
+    this.navCtrl.push(NfcPage);
+  }
+
   confirmarCompra(){
     
     this.compra.productos = this.items;
@@ -156,6 +161,7 @@ selectedAlumno: any;
     this.http.post('http://codicilabs.com/proyectos/card/index.php/api/confirmarCompra', {alumno: this.compra.alumno, productos: this.compra.productos, total:this.total}).subscribe(data => {
         var myJSON = JSON.stringify(data);
         console.log(myJSON);
+        volverNFC();
       }, err => {console.log("ERROR!: ", JSON.stringify(err));});
       
   
