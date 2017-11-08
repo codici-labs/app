@@ -91,9 +91,9 @@ export class NfcPage {
         }
         catch (e) {
           console.log("no existe usuario");
-          this.nfcTexto = "No existe usuario";
-          this.nfcImage = "assets/img/nfcerror.jpg";
-          this.navCtrl.setRoot(NfcPage);
+          //this.nfcTexto = "No existe usuario";
+          //this.nfcImage = "assets/img/nfcerror.jpg";
+          this.navCtrl.popToRoot();
         }
         
       });
